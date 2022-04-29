@@ -1,35 +1,27 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="@/assets/img/logo.png" />
-    <h1>{{ info.app_name }}</h1>
-  </div>
+  <select
+    name="user"
+    id="user"
+    v-model="selectedUser"
+    :options="options"
+  ></select>
 </template>
 
+//
 <script>
-
 export default {
-  name: 'Home',
   data() {
     return {
-      info: {}
-    }
-  },
-  mounted() {
-    this.loadData()
+      options: [],
+    };
   },
   methods: {
-    async loadData() {
-      const response = await fetch('http://localhost:5000/api/info')
-      this.info = await response.json()
-    }
-  }
-
-
-}
+    selectedUser(v) {
+      console.table(v);
+    },
+  },
+};
 </script>
 
-<style scoped>
-h1 {
-  font-style: italic;
-}
-</style>
+//
+<style scoped></style>

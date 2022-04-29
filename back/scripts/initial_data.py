@@ -1,16 +1,28 @@
+import sys
+
+sys.path.insert(0, "")
+
+
 def main():
-    import sys
 
-    sys.path.insert(0, "")
-
-    from src.domain.info import Info, InfoRepository
+    from src.domain.users import User, UserRepository
 
     database_path = "data/database.db"
+    users_repository = UserRepository(database_path)
 
-    info_repository = InfoRepository(database_path)
+    christian = User(
+        id="uu1", user_name="christian", weight="110", height="185", experiencie=0
+    )
 
-    info_repository.save(Info(app_name="f5-seed-app"))
+    users_repository = UserRepository(database_path)
+    users_repository.save(christian)
+
+    nagore = User(
+        id="uu1", user_name="nagore", weight="50", height="165", experiencie=1
+    )
+
+    users_repository = UserRepository(database_path)
+    users_repository.save(nagore)
 
 
-if __name__ == '__main__':
-    main()
+main()
