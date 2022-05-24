@@ -11,6 +11,12 @@ const routes = [
     name: "Form",
     component: () => import("@/pages/form/FormPage.vue"),
   },
+
+  {
+    path: "/training_plan",
+    name: "Plan",
+    component: () => import("@/pages/training_plan/TrainingPlanPage.vue"),
+  },
 ];
 
 const router = createRouter({

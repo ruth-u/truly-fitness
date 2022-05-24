@@ -5,23 +5,19 @@ sys.path.insert(0, "")
 
 def main():
 
-    from src.domain.users import User, UserRepository
+    from src.domain.user import User, UserRepository
 
     database_path = "data/database.db"
     users_repository = UserRepository(database_path)
 
     christian = User(
-        id="uu1", user_name="christian", weight="110", height="185", experiencie=0
+        id="uu1", full_name="Christian Garcia", user_name="chris11", password="chris123"
     )
-
-    users_repository = UserRepository(database_path)
-    users_repository.save(christian)
-
     nagore = User(
-        id="uu1", user_name="nagore", weight="50", height="165", experiencie=1
+        id="uu2", full_name="Nagore Cuevas", user_name="nagore.c", password="nagore123"
     )
 
-    users_repository = UserRepository(database_path)
+    users_repository.save(christian)
     users_repository.save(nagore)
 
 

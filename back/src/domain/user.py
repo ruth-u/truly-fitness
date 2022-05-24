@@ -2,20 +2,18 @@ import sqlite3
 
 
 class User:
-    def __init__(self, id, user_name, weight, height, experiencie):
+    def __init__(self, id, full_name, user_name, password):
         self.id = id
+        self.full_name = full_name
         self.user_name = user_name
-        self.weight = weight
-        self.height = height
-        self.experiencie = experiencie
+        self.password = password
 
     def to_dict(self):
         return {
             "id": self.id,
+            "full_name": self.full_name,
             "user_name": self.user_name,
-            "weight": self.weight,
-            "height": self.height,
-            "experiencie": self.experiencie,
+            "password": self.password,
         }
 
 
@@ -33,10 +31,9 @@ class UserRepository:
         sql = """
             create table if not exists users (
                id VARCHAR PRIMARY KEY,
+               full_name VARCHAR,
                user_name VARCHAR,
-               weight VARCHAR,
-               height VARCHAR,
-               experiencie NUMERIC
+               password VARCHAR
             )
         """
         conn = self.create_conn()
@@ -56,14 +53,32 @@ class UserRepository:
 
         return all_users
 
+    def get_by_user_name(self, user_name):
+        sql = """SELECT * FROM users WHERE user_name=:user_name"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"user_name": user_name})
+
+        data = cursor.fetchone()
+        if data is None:
+            return None
+        else:
+            user = User(**data)
+        return user
+
     def save(self, user):
-        sql = """insert or replace into users (id, user_name, weight, height, experiencie) 
-                 values (:id, :user_name, :weight, :height, :experiencie)"""
+        sql = """insert or replace into users (id, full_name, user_name, password) 
+                 values (:id, :full_name, :user_name, :password)"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            user.to_dict(),
+            {
+                "id": user.id,
+                "full_name": user.full_name,
+                "name": user.user_name,
+                "password": user.password,
+            },
         )
 
         conn.commit()
