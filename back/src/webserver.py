@@ -4,6 +4,7 @@ from flask_cors import CORS
 
 from src.lib.utils import object_to_json
 from src.domain.user import User, UserRepository
+from src.domain.exercises import Exercise, ExerciseRepository
 
 
 def create_app(repositories):
@@ -28,25 +29,34 @@ def create_app(repositories):
         users = repositories["users"].get_users()
         return object_to_json(users)
 
-    # @app.route("/api/users", methods=["POST"])
-    # def contacts_post():
-    #     user_id = request.headers.get("Authorization")
+    @app.route("/api/users", methods=["POST"])
+    def contacts_post():
+        user_id = request.headers.get("Authorization")
 
-    #     body = request.json
-    #     user = User(
-    #         id=user_id,
-    #         user_name=body["user_name"],
-    #         weight=body["weight"],
-    #         height=body["height"],
-    #         experiencie=body["experiencie"],
-    #     )
+        body = request.json
+        user = User(
+            id=user_id,
+            user_name=body["user_name"],
+            password=body["password"],
+            first_name=body["first_name"],
+            last_name=body["last_name"],
+            goal=body["goal"],
+            weight=body["weight"],
+            height=body["height"],
+            experiencie=body["experiencie"],
+        )
 
-    #     if user.id == user_id:
-    #         repositories["users"].save(user)
-    #         return "", 200
+        if user.id == user_id:
+            repositories["users"].save(user)
+            return "", 200
 
-    #     else:
-    #         return "", 403
+        else:
+            return "", 403
+
+    @app.route("/api/exercises", methods=["GET"])
+    def exercises_get():
+        exercises = repositories["exercises"].get_exercises()
+        return object_to_json(exercises)
 
     # @app.route("/api/users/<id>", methods=["GET"])
     # def users_get_by_id(id):

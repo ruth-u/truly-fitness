@@ -2,18 +2,43 @@ import sqlite3
 
 
 class User:
-    def __init__(self, id, full_name, user_name, password):
+    def __init__(
+        self,
+        id,
+        user_name,
+        password,
+        first_name,
+        last_name,
+        goal,
+        weight,
+        height,
+        experiencie,
+    ):
         self.id = id
-        self.full_name = full_name
         self.user_name = user_name
         self.password = password
+        self.first_name = first_name
+        self.last_name = last_name
+        self.goal = goal
+        self.weight = weight
+        self.height = height
+        self.experiencie = experiencie
+
+    def full_name(self):
+        return self.first_name + " " + self.last_name
 
     def to_dict(self):
         return {
             "id": self.id,
-            "full_name": self.full_name,
             "user_name": self.user_name,
             "password": self.password,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "full_name": self.full_name(),
+            "goal": self.goal,
+            "weight": self.weight,
+            "height": self.height,
+            "experiencie": self.experiencie,
         }
 
 
@@ -31,9 +56,14 @@ class UserRepository:
         sql = """
             create table if not exists users (
                id VARCHAR PRIMARY KEY,
-               full_name VARCHAR,
                user_name VARCHAR,
-               password VARCHAR
+               password VARCHAR,
+               first_name VARCHAR,
+               last_name VARCHAR, 
+               goal VARCHAR, 
+               weight VARCHAR, 
+               height VARCHAR, 
+               experiencie INTEGER
             )
         """
         conn = self.create_conn()
@@ -67,18 +97,10 @@ class UserRepository:
         return user
 
     def save(self, user):
-        sql = """insert or replace into users (id, full_name, user_name, password) 
-                 values (:id, :full_name, :user_name, :password)"""
+        sql = """insert or replace into users (id, user_name, password, first_name, last_name, goal, weight, height, experiencie) 
+                 values (:id, :user_name, :password, :first_name, :last_name, :goal, :weight, :height, :experiencie)"""
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(
-            sql,
-            {
-                "id": user.id,
-                "full_name": user.full_name,
-                "name": user.user_name,
-                "password": user.password,
-            },
-        )
+        cursor.execute(sql, user.to_dict())
 
         conn.commit()

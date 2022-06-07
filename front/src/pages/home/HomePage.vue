@@ -1,40 +1,38 @@
 <template>
-  <body>
-    <section class="login-page">
-      <h1>Truly <br />Fitness</h1>
-      <div class="form">
-        <form class="login-form">
-          <label for="user_name"></label>
-          <input
-            type="text"
-            id="user_name"
-            name="user_name"
-            placeholder="nombre de usuario"
-            v-model="user.user_name"
-            required
-          />
-          <label for="password"></label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="contraseña"
-            v-model="user.password"
-            required
-          />
+  <section class="login-page">
+    <h1>Truly <br />Fitness</h1>
+    <div class="form">
+      <form class="login-form">
+        <label for="user_name"></label>
+        <input
+          type="text"
+          id="user_name"
+          name="user_name"
+          placeholder="nombre de usuario"
+          v-model="user.user_name"
+          required
+        />
+        <label for="password"></label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="contraseña"
+          v-model="user.password"
+          required
+        />
 
-          <p class="message">
-            ¿Aun no te has registrado? <a href="#">Registrate</a>
-          </p>
-          <button @click.prevent="onLoginClicked">Login</button>
-        </form>
-      </div>
-    </section>
-  </body>
+        <p class="message">
+          ¿Aun no te has registrado?
+          <a href="/sing-up">Registrate</a>
+        </p>
+        <button @click.prevent="onLoginClicked">Login</button>
+      </form>
+    </div>
+  </section>
 </template>
 
 <script>
-import config from "@/config.js";
 import { loginUser } from "@/services/auth.js";
 
 export default {
@@ -46,19 +44,8 @@ export default {
       },
     };
   },
-  mounted() {
-    this.loadData();
-  },
+
   methods: {
-    async loadData() {
-      let endpoint = `${config.API_PATH}/users`;
-      let response = await fetch(endpoint);
-      let loadData = await response.json();
-      this.users = loadData;
-
-      console.log(this.users);
-    },
-
     isValidateLoginForm() {
       if (this.user_name === "" || this.password === "") {
         return false;
@@ -88,14 +75,14 @@ export default {
 
 //
 <style scoped>
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
 * {
   margin: 0;
   padding: 0;
   border: 0;
 }
-
+section {
+  width: 100vw;
+}
 h1 {
   text-align: center;
   font-family: "Roboto", sans-serif #081106;
@@ -167,6 +154,5 @@ body {
     rgba(118, 184, 82, 1) 50%
   );
   font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 </style>

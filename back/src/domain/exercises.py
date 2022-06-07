@@ -2,17 +2,22 @@ import sqlite3
 
 
 class Exercise:
-    def __init__(self, id, user_id, name, description):
+    def __init__(self, id, name, description, img, week_day, week):
         self.id = id
-        self.user_id = user_id
         self.name = name
         self.description = description
+        self.img = img
+        self.week_day = week_day
+        self.week = week
 
     def to_dict(self):
         return {
-            "user_id": self.user_id,
+            "id": self.id,
             "name": self.name,
             "description": self.description,
+            "img": self.img,
+            "week_day": self.week_day,
+            "week": self.week,
         }
 
 
@@ -27,14 +32,16 @@ class ExerciseRepository:
         return conn
 
     def init_tables(self):
-        sql = """CREATE TABLE if not exist exercises (
-                id VARCHAR PRIMAREY KEY,
-                user_id VRCHAR,
-                name VRCHAR,
-                description VARVHAR,
-                FOREING KEY (user_id) references users (id)
-                
-        )"""
+        sql = """CREATE TABLE if not exists exercises (
+                id VARCHAR PRIMARY KEY,
+                name VARCHAR,
+                description VARCHAR,
+                img VARCHAR,
+                week_day VARCHAR,
+                week VARCHAR
+                )
+
+        """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -53,21 +60,11 @@ class ExerciseRepository:
             result.append(exercise)
         return result
 
+    def save(self, exercise):
+        sql = """insert into exercises (id, name, description, img, week_day, week) 
+                    values (:id, :name, :description, :img, :week_day, :week)"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, exercise.to_dict())
 
-def save(self, exercises):
-    sql = """insert into exercises (id, user_id, description) 
-                 values (:id, :user_id, :weight, :description)"""
-    conn = self.create_conn()
-    cursor = conn.cursor()
-    exercise = exercises.to_dict()
-    cursor.execute(
-        sql,
-        {
-            "id": exercise["id"],
-            "user_id": exercise["user_id"],
-            "name": exercise["name"],
-            "description": exercise["description"],
-        },
-    )
-
-    conn.commit()
+        conn.commit()

@@ -10,7 +10,15 @@ def setup():
     client = app.test_client()
 
     christian = User(
-        id="uu1", full_name="Christian Garcia", user_name="chris11", password="chris123"
+        id="uu1",
+        first_name="Christian",
+        last_name="Garcia",
+        user_name="chris11",
+        password="chris123",
+        goal="ganar peso",
+        weight="70",
+        height="185",
+        experiencie=1,
     )
     user_repository.save(christian)
 
@@ -31,19 +39,19 @@ def test_should_validate_login():
     assert user[0]["password"] == "chris123"
 
 
-# def test_should_fail_if_invalid_password():
-#     client = setup()
+def test_should_fail_if_invalid_password():
+    client = setup()
 
-#     body = {"user": "user-tomas", "password": "el peor"}
-#     response = client.post("/auth/login", json=body)
+    body = {"user_name": "chris11", "password": "contraseña-invalida"}
+    response = client.post("/auth/login", json=body)
 
-#     assert response.status_code == 401
+    assert response.status_code == 401
 
 
-# def test_should_fail_if_user_not_exists():
-#     client = setup()
+def test_should_fail_if_user_not_exists():
+    client = setup()
 
-#     body = {"user": "user-not-exists", "password": "el mediano"}
-#     response = client.post("/auth/login", json=body)
+    body = {"user_name": "user-not-exists", "password": "chris123"}
+    response = client.post("/auth/login", json=body)
 
-#     assert response.status_code == 401
+    assert response.status_code == 401
