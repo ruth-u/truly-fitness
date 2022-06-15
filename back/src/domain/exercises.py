@@ -2,13 +2,11 @@ import sqlite3
 
 
 class Exercise:
-    def __init__(self, id, name, description, img, week_day, week):
+    def __init__(self, id, name, description, img):
         self.id = id
         self.name = name
         self.description = description
         self.img = img
-        self.week_day = week_day
-        self.week = week
 
     def to_dict(self):
         return {
@@ -16,8 +14,6 @@ class Exercise:
             "name": self.name,
             "description": self.description,
             "img": self.img,
-            "week_day": self.week_day,
-            "week": self.week,
         }
 
 
@@ -36,11 +32,8 @@ class ExerciseRepository:
                 id VARCHAR PRIMARY KEY,
                 name VARCHAR,
                 description VARCHAR,
-                img VARCHAR,
-                week_day VARCHAR,
-                week VARCHAR
+                img VARCHAR
                 )
-
         """
         conn = self.create_conn()
         cursor = conn.cursor()
@@ -60,9 +53,48 @@ class ExerciseRepository:
             result.append(exercise)
         return result
 
+    # def get_advanced_exercises(self):
+    #     sql = """SELECT * FROM exercises where id>=5"""
+    #     conn = self.create_conn()
+    #     cursor = conn.cursor()
+    #     cursor.execute(sql)
+    #     data = cursor.fetchall()
+
+    #     result = []
+    #     for i in data:
+    #         exercise = Exercise(
+    #             id=i["id"],
+    #             name=i["name"],
+    #             description=i["description"],
+    #             img=i["img"],
+    #         )
+    #         result.append(exercise)
+    #     return result
+
+    # def get_basic_exercises(self):
+    #     sql = """SELECT * FROM exercises where id>=0"""
+    #     conn = self.create_conn()
+    #     cursor = conn.cursor()
+    #     cursor.execute(sql)
+    #     data = cursor.fetchall()
+
+    #     if data is None:
+    #         return None
+    #     else:
+    #         result = []
+    #         for i in data:
+    #             exercise = Exercise(
+    #                 id=i["id"],
+    #                 name=i["name"],
+    #                 description=i["description"],
+    #                 img=i["img"],
+    #             )
+    #             result.append(exercise)
+    #         return result
+
     def save(self, exercise):
-        sql = """insert into exercises (id, name, description, img, week_day, week) 
-                    values (:id, :name, :description, :img, :week_day, :week)"""
+        sql = """insert into exercises (id, name, description, img) 
+                    values (:id, :name, :description, :img)"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, exercise.to_dict())

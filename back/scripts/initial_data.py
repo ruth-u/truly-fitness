@@ -20,6 +20,7 @@ def main():
         weight="110",
         height="185",
         experiencie=1,
+        register_date="2022-06-07",
     )
     nagore = User(
         id="uu2",
@@ -31,6 +32,7 @@ def main():
         weight="48",
         height="165",
         experiencie=0,
+        register_date="2022-06-07",
     )
 
     users_repository.save(christian)
@@ -42,89 +44,69 @@ def main():
     exercises_repository = ExerciseRepository(database_path)
 
     exercise5 = Exercise(
-        id="005",
+        id="5",
         name="Sentadillas",
         description="20 repeticiones",
         img="",
-        week_day="8",
-        week="2",
     )
     exercise6 = Exercise(
-        id="006",
+        id="6",
         name="Zancadas",
         description="20 repeticiones",
         img="",
-        week_day="8",
-        week="2",
     )
     exercise7 = Exercise(
-        id="007",
+        id="7",
         name="Hip-thrust",
         description="20 repeticiones",
         img="",
-        week_day="8",
-        week="2",
     )
     exercise8 = Exercise(
-        id="008",
+        id="8",
         name="Patadas de burro",
         description="20 segundos",
         img="",
-        week_day="8",
-        week="2",
     )
     exercise9 = Exercise(
-        id="009",
+        id="9",
         name="Hip-thrust",
         description="20 repeticiones",
         img="",
-        week_day="8",
-        week="2",
     )
 
     exercise0 = Exercise(
-        id="000",
+        id="0",
         name="Sentadillas",
         description="10 repeticiones",
         img="",
-        week_day="1",
-        week="1",
     )
 
     exercise1 = Exercise(
-        id="001",
+        id="1",
         name="Patadas de burro",
         description="10 repeticiones",
         img="",
-        week_day="1",
-        week="1",
     )
 
     exercise2 = Exercise(
-        id="002",
+        id="2",
         name="Hip-thrust",
         description="10 repeticiones",
         img="",
-        week_day="1",
-        week="1",
     )
 
     exercise3 = Exercise(
-        id="003",
+        id="3",
         name="Zancadas",
         description="10 repeticionesa",
         img="",
-        week_day="1",
-        week="1",
     )
 
     exercise4 = Exercise(
-        id="004",
+        id="4",
         name="Hip-thrust",
         description="10 repeticiones",
         img="",
-        week_day="1",
-        week="1",
     )
     exercises_repository.save(exercise0)
     exercises_repository.save(exercise1)

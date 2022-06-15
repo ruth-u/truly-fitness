@@ -4,7 +4,7 @@ from src.webserver import create_app
 from src.domain.user import User, UserRepository
 
 
-def test_should_return_data_from_new_user():
+def test_should_return_a_new_user():
     users_repository = UserRepository(temp_file())
     app = create_app(repositories={"users": users_repository})
     client = app.test_client()
@@ -19,6 +19,7 @@ def test_should_return_data_from_new_user():
         "weight": "70",
         "height": "185",
         "experiencie": 1,
+        "register_date": "2202-06-05",
     }
     response_post = client.post(
         "/api/users", json=body, headers={"Authorization": "uu1"}
@@ -26,7 +27,7 @@ def test_should_return_data_from_new_user():
 
     assert response_post.status_code == 200
 
-    response_get = client.get("/api/users", headers={"Authorization": "uu1"})
+    response_get = client.get("/api/users", json=body, headers={"Authorization": "uu1"})
 
     user_list = response_get.json
     assert user_list[0]["id"] == "uu1"
@@ -38,3 +39,6 @@ def test_should_return_data_from_new_user():
     assert user_list[0]["weight"] == "70"
     assert user_list[0]["height"] == "185"
     assert user_list[0]["experiencie"] == 1
+
+
+# def test_should_get_exercises

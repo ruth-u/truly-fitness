@@ -44,6 +44,7 @@ def create_app(repositories):
             weight=body["weight"],
             height=body["height"],
             experiencie=body["experiencie"],
+            register_date=body["register_date"],
         )
 
         if user.id == user_id:
@@ -56,6 +57,7 @@ def create_app(repositories):
     @app.route("/api/exercises", methods=["GET"])
     def exercises_get():
         exercises = repositories["exercises"].get_exercises()
+
         return object_to_json(exercises)
 
     # @app.route("/api/users/<id>", methods=["GET"])

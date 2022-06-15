@@ -19,6 +19,7 @@ def setup():
         weight="70",
         height="185",
         experiencie=1,
+        register_date="2022-06-07",
     )
     user_repository.save(christian)
 

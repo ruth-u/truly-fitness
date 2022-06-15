@@ -91,6 +91,17 @@
         v-model="user.experiencie"
       />
       <label for="experiencie_no">No</label>
+
+      <br />
+
+      <label for="height">Fecha de registro:</label>
+      <input
+        type="date"
+        id="user_register"
+        name="user_register"
+        v-model="user.register_date"
+        required
+      />
     </div>
     <div>
       <button @click.prevent="createNewUser(user)">Guardar</button>
@@ -117,6 +128,7 @@ export default {
         weight: "",
         height: "",
         experiencie: false,
+        register_date: "",
       },
     };
   },
@@ -130,7 +142,8 @@ export default {
         this.user.goal === "" ||
         this.user.weight === "" ||
         this.user.height === "" ||
-        this.user.experiencie === ""
+        this.user.experiencie === "" ||
+        this.user.register_date === ""
       ) {
         return false;
       } else {

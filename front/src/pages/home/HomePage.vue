@@ -85,7 +85,7 @@ section {
 }
 h1 {
   text-align: center;
-  font-family: "Roboto", sans-serif #081106;
+
   font-weight: bold;
   font-size: 30 px;
   color: #393942;
@@ -107,21 +107,22 @@ h1 {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
-  font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #f2f2f2;
+  background: #ffffff;
   width: 100%;
   border: 0;
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
   font-size: 14px;
 }
 .form button {
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
   text-transform: uppercase;
   outline: 0;
-  background: #4caf50;
+  background: rgba(177, 124, 164, 0.438);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -135,24 +136,17 @@ h1 {
 .form button:hover,
 .form button:active,
 .form button:focus {
-  background: #43a047;
+  background: rgba(216, 129, 196, 0.767);
 }
 .form .message {
+  font-weight: bold;
   margin: 15px 0 0;
-  color: #666666;
+  color: #000000;
   font-size: 12px;
 }
 .form .message a {
-  color: #4caf50;
+  font-weight: bold;
+  color: rgba(189, 92, 166, 0.952);
   text-decoration: none;
-}
-
-body {
-  background: linear-gradient(
-    90deg,
-    rgba(141, 194, 111, 1) 0%,
-    rgba(118, 184, 82, 1) 50%
-  );
-  font-family: "Roboto", sans-serif;
 }
 </style>

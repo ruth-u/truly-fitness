@@ -31,6 +31,7 @@ def test_should_return_a_user():
         weight="70",
         height="185",
         experiencie=1,
+        register_date="2022-06-07",
     )
     users_repository.save(christian)
 
@@ -44,6 +45,7 @@ def test_should_return_a_user():
         weight="110",
         height="175",
         experiencie=0,
+        register_date="2022-06-08",
     )
     users_repository.save(jeff)
 

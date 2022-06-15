@@ -13,6 +13,7 @@ class User:
         weight,
         height,
         experiencie,
+        register_date,
     ):
         self.id = id
         self.user_name = user_name
@@ -23,6 +24,7 @@ class User:
         self.weight = weight
         self.height = height
         self.experiencie = experiencie
+        self.register_date = register_date
 
     def full_name(self):
         return self.first_name + " " + self.last_name
@@ -39,6 +41,7 @@ class User:
             "weight": self.weight,
             "height": self.height,
             "experiencie": self.experiencie,
+            "register_date": self.register_date,
         }
 
 
@@ -63,7 +66,8 @@ class UserRepository:
                goal VARCHAR, 
                weight VARCHAR, 
                height VARCHAR, 
-               experiencie INTEGER
+               experiencie INTEGER,
+               register_date VARCHAR
             )
         """
         conn = self.create_conn()
@@ -97,8 +101,8 @@ class UserRepository:
         return user
 
     def save(self, user):
-        sql = """insert or replace into users (id, user_name, password, first_name, last_name, goal, weight, height, experiencie) 
-                 values (:id, :user_name, :password, :first_name, :last_name, :goal, :weight, :height, :experiencie)"""
+        sql = """insert or replace into users (id, user_name, password, first_name, last_name, goal, weight, height, experiencie, register_date) 
+                 values (:id, :user_name, :password, :first_name, :last_name, :goal, :weight, :height, :experiencie, :register_date)"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, user.to_dict())

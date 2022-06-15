@@ -25,8 +25,6 @@ def test_should_return_exercises():
         name="sentadillas",
         description="10 repeticiones",
         img="",
-        week_day="1",
-        week="1",
     )
     exercises_repository.save(exercise1)
 
@@ -35,8 +33,6 @@ def test_should_return_exercises():
         name="zancadas",
         description="10 repeticiones",
         img="",
-        week_day="2",
-        week="1",
     )
 
     exercises_repository.save(exercise2)
@@ -49,12 +45,8 @@ def test_should_return_exercises():
     assert exercise_list[0]["name"] == "sentadillas"
     assert exercise_list[0]["description"] == "10 repeticiones"
     assert exercise_list[0]["img"] == ""
-    assert exercise_list[0]["week_day"] == "1"
-    assert exercise_list[0]["week"] == "1"
 
     assert exercise_list[1]["id"] == "008"
     assert exercise_list[1]["name"] == "zancadas"
     assert exercise_list[1]["description"] == "10 repeticiones"
     assert exercise_list[1]["img"] == ""
-    assert exercise_list[1]["week_day"] == "2"
-    assert exercise_list[1]["week"] == "1"
