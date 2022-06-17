@@ -2,18 +2,18 @@ import sqlite3
 
 
 class UserExercise:
-    def __init__(self, user_id, exercise_id, exercise_date, done):
+    def __init__(self, user_id, exercise_id, exercise_date, exercise_done):
         self.user_id = user_id
         self.exercise_id = exercise_id
         self.exercise_date = exercise_date
-        self.done = done
+        self.exercise_done = exercise_done
 
     def to_dict(self):
         return {
             "user_id": self.user_id,
             "exercise_id": self.exercise_id,
             "exercise_date": self.exercise_date,
-            "done": self.done,
+            "exercise_done": self.exercise_done,
         }
 
 
@@ -45,7 +45,7 @@ class UserExerciseRepository:
         conn.commit()
 
     def get_exercises(self):
-        sql = """select * from user_exercises"""
+        sql = """select * from users_exercises"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -58,17 +58,10 @@ class UserExerciseRepository:
         return result
 
     def save_user_exercises(self, user_exercise):
-        sql = """insert into user_exercises (user_id, exercise_id, exercise_date, done)
-                    values (:user_id, :exercise_id, :exercise_date, :done)"""
+        sql = """insert into users_exercises (user_id, exercise_id, exercise_date, exercise_done)
+                    values (:user_id, :exercise_id, :exercise_date, :exercise_done)"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, user_exercise.to_dict())
-
-        data = cursor.fetchall()
-        result = []
-        for item in data:
-            exercise = UserExercise(**item)
-            result.append(exercise)
-        return result
 
         conn.commit()

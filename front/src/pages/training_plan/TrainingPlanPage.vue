@@ -31,6 +31,15 @@ export default {
 
       console.log("*******", response);
     },
+
+    exercisesImages(){
+      exercises = this.getAllExercises()
+
+      if (exercises.name === "sentadillas"){
+          return
+      }
+
+    }
   },
 };
 </script>

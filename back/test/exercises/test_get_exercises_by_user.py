@@ -114,28 +114,28 @@ def test_should_return_a_plan_by_date():
         user_id="uu1",
         exercise_id="8",
         exercise_date="2022-06-09",
-        done=False,
+        exercise_done=False,
     )
 
     other_first_day_plan = UserExercise(
         user_id="uu1",
         exercise_id="9",
         exercise_date="2022-06-09",
-        done=False,
+        exercise_done=False,
     )
 
     second_day_plan = UserExercise(
         user_id="uu1",
         exercise_id="10",
         exercise_date="2022-06-010",
-        done=False,
+        exercise_done=False,
     )
 
     third_day_plan = UserExercise(
         user_id="uu1",
         exercise_id="11",
         exercise_date="2022-06-11",
-        done=False,
+        exercise_done=False,
     )
     # fourth_day_plan = Exercise(
     #     user_id="uu1",
@@ -179,19 +179,19 @@ def test_should_return_a_plan_by_date():
     assert exercise_list[0]["exercise_id"] == "8"
 
     assert exercise_list[0]["exercise_date"] == "2022-06-09"
-    assert exercise_list[0]["done"] == False
+    assert exercise_list[0]["exercise_done"] == False
 
     assert exercise_list[0]["user_id"] == "uu1"
     assert exercise_list[0]["exercise_id"] == "9"
     assert exercise_list[0]["exercise_date"] == "2022-06-09"
-    assert exercise_list[0]["done"] == False
+    assert exercise_list[0]["exercise_done"] == False
 
     assert exercise_list[0]["user_id"] == "uu1"
     assert exercise_list[0]["exercise_id"] == "10"
     assert exercise_list[0]["exercise_date"] == "2022-06-10"
-    assert exercise_list[0]["done"] == False
+    assert exercise_list[0]["exercise_done"] == False
 
     assert exercise_list[0]["user_id"] == "uu1"
     assert exercise_list[0]["exercise_id"] == "11"
     assert exercise_list[0]["exercise_date"] == "2022-06-11"
-    assert exercise_list[0]["done"] == ""
+    assert exercise_list[0]["exercise_done"] == ""

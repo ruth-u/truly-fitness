@@ -57,7 +57,7 @@ def main():
     )
     exercise7 = Exercise(
         id="7",
-        name="Hip-thrust",
+        name="Hip thrust",
         description="20 repeticiones",
         img="",
     )
@@ -69,7 +69,7 @@ def main():
     )
     exercise9 = Exercise(
         id="9",
-        name="Hip-thrust",
+        name="Hip thrust",
         description="20 repeticiones",
         img="",
     )
@@ -90,7 +90,7 @@ def main():
 
     exercise2 = Exercise(
         id="2",
-        name="Hip-thrust",
+        name="Hip thrust",
         description="10 repeticiones",
         img="",
     )
@@ -104,7 +104,7 @@ def main():
 
     exercise4 = Exercise(
         id="4",
-        name="Hip-thrust",
+        name="Hip thrust",
         description="10 repeticiones",
         img="",
     )
