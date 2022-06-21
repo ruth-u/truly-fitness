@@ -54,7 +54,7 @@ class ExerciseRepository:
         return result
 
     # def get_advanced_exercises(self):
-    #     sql = """SELECT * FROM exercises where id>=5"""
+    #     sql = """SELECT * FROM exercises where id>=21"""
     #     conn = self.create_conn()
     #     cursor = conn.cursor()
     #     cursor.execute(sql)
@@ -72,7 +72,7 @@ class ExerciseRepository:
     #     return result
 
     # def get_basic_exercises(self):
-    #     sql = """SELECT * FROM exercises where id>=0"""
+    #     sql = """SELECT * FROM exercises where id<21"""
     #     conn = self.create_conn()
     #     cursor = conn.cursor()
     #     cursor.execute(sql)

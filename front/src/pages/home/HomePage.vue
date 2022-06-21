@@ -122,7 +122,7 @@ h1 {
   /* font-family: "Roboto", sans-serif; */
   text-transform: uppercase;
   outline: 0;
-  background: rgba(177, 124, 164, 0.438);
+  background: rgba(57, 116, 226, 0.438);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -136,7 +136,7 @@ h1 {
 .form button:hover,
 .form button:active,
 .form button:focus {
-  background: rgba(216, 129, 196, 0.767);
+  background: rgba(8, 86, 122, 0.767);
 }
 .form .message {
   font-weight: bold;
@@ -146,7 +146,7 @@ h1 {
 }
 .form .message a {
   font-weight: bold;
-  color: rgba(189, 92, 166, 0.952);
+  color: rgba(12, 22, 54, 0.767);
   text-decoration: none;
 }
 </style>

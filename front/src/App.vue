@@ -9,6 +9,10 @@
   font-family: "Josefin Sans", sans-serif;
 }
 body {
-  background-color: rgba(173, 150, 121, 0.562);
+  background-color: rgba(255, 255, 255, 255);
+  background-image: url("https://i.pinimg.com/564x/bd/5b/0d/bd5b0de38babb5e9fc07731ba9b9dbdb.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
 }
 </style>
