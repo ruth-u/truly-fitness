@@ -53,44 +53,41 @@ class ExerciseRepository:
             result.append(exercise)
         return result
 
-    # def get_advanced_exercises(self):
-    #     sql = """SELECT * FROM exercises where id>=21"""
-    #     conn = self.create_conn()
-    #     cursor = conn.cursor()
-    #     cursor.execute(sql)
-    #     data = cursor.fetchall()
+    def get_advanced_exercises(self):
+        sql = """SELECT * FROM exercises where id>=21"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        data = cursor.fetchall()
 
-    #     result = []
-    #     for i in data:
-    #         exercise = Exercise(
-    #             id=i["id"],
-    #             name=i["name"],
-    #             description=i["description"],
-    #             img=i["img"],
-    #         )
-    #         result.append(exercise)
-    #     return result
+        result = []
+        for i in data:
+            exercise = Exercise(
+                id=i["id"],
+                name=i["name"],
+                description=i["description"],
+                img=i["img"],
+            )
+            result.append(exercise)
+        return result
 
-    # def get_basic_exercises(self):
-    #     sql = """SELECT * FROM exercises where id<21"""
-    #     conn = self.create_conn()
-    #     cursor = conn.cursor()
-    #     cursor.execute(sql)
-    #     data = cursor.fetchall()
+    def get_basic_exercises(self):
+        sql = """SELECT * FROM exercises where id<21"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        data = cursor.fetchall()
 
-    #     if data is None:
-    #         return None
-    #     else:
-    #         result = []
-    #         for i in data:
-    #             exercise = Exercise(
-    #                 id=i["id"],
-    #                 name=i["name"],
-    #                 description=i["description"],
-    #                 img=i["img"],
-    #             )
-    #             result.append(exercise)
-    #         return result
+        result = []
+        for i in data:
+            exercise = Exercise(
+                id=i["id"],
+                name=i["name"],
+                description=i["description"],
+                img=i["img"],
+            )
+            result.append(exercise)
+        return result
 
     def save(self, exercise):
         sql = """insert into exercises (id, name, description, img) 

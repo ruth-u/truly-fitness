@@ -1,5 +1,5 @@
 from atexit import register
-from src.lib.utils import temp_file
+from src.lib.utils import temp_file, object_to_json
 
 from src.webserver import create_app
 from src.domain.user import User, UserRepository

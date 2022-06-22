@@ -1,13 +1,10 @@
 <template>
-  <h1>My plan</h1>
+  <h1>My Plan</h1>
   <section class="my-plans">
     <section class="exerciseSection">
       <div v-for="exercise in exercises" :key="exercise.id">
-        <article>{{ exercise.name }}</article>
-        <article>{{ exercise.description }}</article>
         <article>
-          {{ exercises.img }}
-          <img :key="exercise.id" :src="images2[exercise.id - 1]" />
+          <h2>{{ exercise.name }}</h2>
         </article>
       </div>
     </section>
@@ -21,53 +18,28 @@ export default {
   data() {
     return {
       exercises: [],
-      user: localStorage,
-      images2: [
-        require("@/images/legs/sentadillas.jpg"),
-        require("@/images/legs/hip-thrust.jpeg"),
-        require("@/images/legs/patadas_de_burro.jpg"),
-        require("@/images/legs/peso-muerto.jpg"),
-        require("@/images/legs/hip-thrust.jpeg"),
-        require("@/images/abs/plancha.jpg"),
-        require("@/images/abs/abdominales.jpg"),
-        require("@/images/abs/dead-bug.jpg"),
-        require("@/images/abs/Bicycle-crunches.jpg"),
-        require("@/images/abs/russian-twist.jpg"),
-        require("@/images/arms/curl-biceps.jpg"),
-        require("@/images/arms/flexiones.jpg"),
-        require("@/images/arms/levantamiento-lateral-hombros.jpg"),
-        require("@/images/arms/rotacion-ext.jpg"),
-        require("@/images/arms/remo-con-mancuernas.jpg"),
-        require("@/images/hit/correr.jpg"),
-        require("@/images/hit/zancadas.jpg"),
-        require("@/images/hit/jumping-jacks.jpg"),
-        require("@/images/hit/burpees.jpg"),
-        require("@/images/hit/mountain-climbers.jpg"),
-      ],
     };
   },
 
   mounted() {
     this.getAllExercises();
+    // this.getUsers();
   },
 
   methods: {
     async getAllExercises() {
-      const endpoint = `${config.API_PATH}/exercises`;
+      const endpoint = `${config.API_PATH}/plan`;
       let response = await fetch(endpoint);
       this.exercises = await response.json();
-      console.log(response.img);
+      console.log("LACLSITOOO", this.user);
     },
   },
 
-  // computed: {
-  //   exercisesImages(exercises) {
-  //     exercises = this.getAllExercises();
-  //     // imgList = [];
-  //     for (let i of exercises) {
-  //       console.log(i);
-  //     }
-  //   },
+  // async getUsers() {
+  //   const endpoint = `${config.API_PATH}/users`;
+  //   let response = await fetch(endpoint);
+  //   this.users = await response.json();
+  //   console.log(">>>>>", this.users);
   // },
 };
 </script>

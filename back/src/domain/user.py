@@ -97,8 +97,43 @@ class UserRepository:
         if data is None:
             return None
         else:
-            user = User(**data)
+            user = User(
+                id=data["id"],
+                user_name=data["user_name"],
+                password=data["password"],
+                first_name=data["first_name"],
+                last_name=data["last_name"],
+                goal=data["goal"],
+                weight=data["weight"],
+                height=data["height"],
+                experiencie=data["experiencie"],
+                register_date=data["register_date"],
+            )
         return user
+
+    def get_user_by_experiencie(self, experiencie):
+        sql = """SELECT * FROM users WHERE experiencie=:experiencie"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"experiencie": experiencie})
+
+        data = cursor.fetchall()
+        result = []
+        for item in data:
+            user = User(
+                id=item["id"],
+                user_name=item["user_name"],
+                password=item["password"],
+                first_name=item["first_name"],
+                last_name=item["last_name"],
+                goal=item["goal"],
+                weight=item["weight"],
+                height=item["height"],
+                experiencie=item["experiencie"],
+                register_date=item["register_date"],
+            )
+            result.append(result)
+        return result
 
     def save(self, user):
         sql = """insert or replace into users (id, user_name, password, first_name, last_name, goal, weight, height, experiencie, register_date) 
