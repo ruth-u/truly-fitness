@@ -10,12 +10,12 @@
 }
 body {
   min-width: 100vh;
-  background-color: rgba(17, 40, 141, 0.521);
-  background-image: url("https://png.pngtree.com/background/20210711/original/pngtree-fitness-and-fashion-fresh-ads-picture-image_1097123.jpg");
+  background-color: #ededf2;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/754/160/non_2x/fitness-equipment-and-health-food-on-blue-wooden-background-free-photo.JPG");
   background-repeat: no-repeat;
-  -webkit-background-size: cover;
+  /* -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover; */
   background-size: fixed;
   background-position: center;
 }

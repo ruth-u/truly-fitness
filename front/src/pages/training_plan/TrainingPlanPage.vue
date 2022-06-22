@@ -1,7 +1,7 @@
 <template>
   <h1>Bienvenido</h1>
   <section class="my-plan">
-    <section class="exerciseSection">
+    <section class="exerciseContent">
       <button @click="filterByLegs">Tren inferior</button>
 
       <button @click="filterByAbs">Abdomen</button>
@@ -11,11 +11,6 @@
       <button @click="filterByHit">Hit</button>
 
       <button @click="getAllExercises">Todos</button>
-    </section>
-  </section>
-
-  <section class="my-plans">
-    <section class="exerciseSection">
       <div v-for="exercise in filteredList" :key="exercise.id">
         <article>
           <h2>{{ exercise.name }}</h2>
@@ -26,12 +21,10 @@
         </article>
 
         <article>
-          <router-link :to="`/exercises/${exercise.id}`"
-            >ver detalle</router-link
-          >
+          <router-link :to="`/exercises/${exercise.id}`">
+            ver detalle
+          </router-link>
         </article>
-
-        >
       </div>
     </section>
   </section>
@@ -147,21 +140,36 @@ h1 {
   font-size: 50px;
 }
 
-.exerciseSection {
+/* .my-plan {
+  margin-top: 2em;
+  display: grid;
+  place-content: center;
+}
+.excerciseSection {
+  border: 1px solid black;
+  padding: 1em 15em 1em 15em;
+  margin-top: 1em;
+  border-radius: 2%;
+  background-color: rgba(170, 120, 158, 0.438);
+} */
+.my-plan {
+  background-color: rgba(233, 190, 134, 0.623);
+}
+.exerciseContent {
   width: 100%;
   overflow-y: scroll;
-  max-height: 70vh;
+  max-height: 80vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 0.5em;
+  border: 1px solid black;
 }
 
-.exerciseSection img {
+.exerciseContent img {
   max-width: 100%;
   max-height: 62%;
 }
 
-.exerciseSection article {
+.exerciseContent article {
   padding: 0.5em;
   display: grid;
   grid-template-rows: auto auto auto;
