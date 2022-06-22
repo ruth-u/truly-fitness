@@ -59,11 +59,10 @@ def create_app(repositories):
         exercises = repositories["exercises"].get_exercises()
         return object_to_json(exercises)
 
-    # @app.route("/api/exercises_category", methods=["GET"])
-    # def get_exercise_category():
-
-    #     exercises = repositories["exercises"].get_exercises_by_category(category)
-    #     return object_to_json(exercises)
+    @app.route("/api/exercises/<id>", methods=["GET"])
+    def exercises_get_by_id(id):
+        exercises = repositories["exercises"].get_exercise_by_id(id)
+        return object_to_json(exercises)
 
     @app.route("/api/plan", methods=["GET"])
     def exercises_by_exeperiencie():

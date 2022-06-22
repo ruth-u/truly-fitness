@@ -1,22 +1,7 @@
 <template>
-  <h1>Bienvenido</h1>
-  <section class="my-plan">
-    <section class="exerciseSection">
-      <button @click="filterByLegs">Tren inferior</button>
-
-      <button @click="filterByAbs">Abdomen</button>
-
-      <button @click="filterByArms">Tren superior</button>
-
-      <button @click="filterByHit">Hit</button>
-
-      <button @click="getAllExercises">Todos</button>
-    </section>
-  </section>
-
   <section class="my-plans">
     <section class="exerciseSection">
-      <div v-for="exercise in filteredList" :key="exercise.id">
+      <div>
         <article>
           <h2>{{ exercise.name }}</h2>
         </article>
@@ -24,13 +9,6 @@
           {{ exercises.img }}
           <img :key="exercise.id" :src="images[exercise.id - 1]" />
         </article>
-        <article>
-          <router-link :to="`/exercises/${exercises.id}`"
-            >ver detalle</router-link
-          >
-        </article>
-
-        >
       </div>
     </section>
   </section>
@@ -42,8 +20,7 @@ import config from "@/config.js";
 export default {
   data() {
     return {
-      exercises: [],
-      filteredList: null,
+
       images: [
         require("@/images/legs/sentadillas.jpg"),
         require("@/images/legs/hip-thrust.jpeg"),
@@ -90,35 +67,22 @@ export default {
   },
 
   mounted() {
-    this.getAllExercises();
+
+    this.getExercisesById()
   },
 
-  methods: {
-    filterByLegs() {
-      this.filteredList = this.exercises.filter(
-        (exercise) => exercise.category == "pierna"
-      );
-    },
-    filterByAbs() {
-      this.filteredList = this.exercises.filter(
-        (exercise) => exercise.category == "abdomen"
-      );
-    },
-    filterByArms() {
-      this.filteredList = this.exercises.filter(
-        (exercise) => exercise.category == "brazos"
-      );
-    },
-    filterByHit() {
-      this.filteredList = this.exercises.filter(
-        (exercise) => exercise.category == "hit"
-      );
-    },
-    async getAllExercises() {
-      const endpoint = `${config.API_PATH}/plan`;
+    async getExercisesById() {
+      let exerciseId = this.$route.params.id;
+      const settings = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const endpoint = `${config.API_PATH}/exercises/${exercise_id}`;
       let response = await fetch(endpoint);
       this.exercises = await response.json();
-      this.filteredList = this.exercises;
       // let user = localStorage.getItem("user");
       // console.log(JSON.parse(user));
     },

@@ -1,5 +1,4 @@
 import sqlite3
-from unicodedata import category
 
 
 class Exercise:
@@ -57,6 +56,15 @@ class ExerciseRepository:
             result.append(exercise)
         return result
 
+    def get_exercise_by_id(self, id):
+        sql = """SELECT * FROM exercises WHERE id = :id"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"id": id})
+        data = cursor.fetchone()
+        exercise = Exercise(**data)
+        return exercise
+
     def get_advanced_exercises(self):
         sql = """SELECT * FROM exercises where id>=21"""
         conn = self.create_conn()
@@ -81,19 +89,6 @@ class ExerciseRepository:
         for i in data:
             exercise = Exercise(**i)
             result.append(exercise)
-        return result
-
-    def get_exercises_by_category(self, category):
-        sql = """SELECT * FROM exercises where category=:category"""
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(sql, {"category": category})
-        data = cursor.fetchall()
-
-        result = []
-        for i in data:
-            category = Exercise(**i)
-            result.append(category)
         return result
 
     def save(self, exercise):
