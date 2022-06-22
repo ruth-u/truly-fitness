@@ -1,6 +1,15 @@
 <template>
-  <h1>Bienvenido</h1>
   <section class="my-plan">
+    <div>
+      <div>
+        <nav>
+          <router-link to="http://foo.com/bar.html#disqus_thread"
+            >ℹ️</router-link
+          >
+        </nav>
+      </div>
+      <h1>Bienvenido</h1>
+    </div>
     <section class="exerciseContent">
       <button @click="filterByLegs">Tren inferior</button>
 
@@ -20,7 +29,7 @@
           <img :key="exercise.id" :src="images[exercise.id - 1]" />
         </article>
 
-        <article>
+        <article class="detailBtn">
           <router-link :to="`/exercises/${exercise.id}`">
             ver detalle
           </router-link>
@@ -137,7 +146,7 @@ export default {
 h1 {
   text-align: center;
   margin-top: 1em;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 /* .my-plan {
@@ -153,6 +162,7 @@ h1 {
   background-color: rgba(170, 120, 158, 0.438);
 } */
 .my-plan {
+  padding-bottom: 1em;
   background-color: rgba(233, 190, 134, 0.623);
 }
 .exerciseContent {
@@ -161,7 +171,6 @@ h1 {
   max-height: 80vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  border: 1px solid black;
 }
 
 .exerciseContent img {
@@ -172,6 +181,9 @@ h1 {
 .exerciseContent article {
   padding: 0.5em;
   display: grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 1fr auto auto;
+}
+nav {
+  text-align: right;
 }
 </style>

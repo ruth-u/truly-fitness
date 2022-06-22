@@ -20,7 +20,12 @@ const routes = [
   {
     path: "/exercises/:id",
     name: "Detail",
-    component: () => import("@/pages/exercise-detail/TrainingDetail.vue"),
+    component: () => import("@/pages/exercise-detail/TrainingDetailPage.vue"),
+  },
+  {
+    path: "/http://foo.com/bar.html#disqus_thread",
+    name: "Info",
+    component: () => import("@/pages/info/InfoPage.vue"),
   },
 ];
 
