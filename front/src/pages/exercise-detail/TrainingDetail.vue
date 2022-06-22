@@ -1,5 +1,5 @@
 <template>
-  <nav></nav>
+  <nav><router-link to="/training_plan">MI PLAN</router-link></nav>
   <h1>Detalle del ejercicio</h1>
   <section class="exerciseContainer">
     <div class="exerciseSection">
@@ -77,13 +77,6 @@ export default {
   methods: {
     async getExercisesById() {
       let exerciseId = this.$route.params.id;
-      // const settings = {
-      //   method: "GET",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // };
-
       let endpoint = `${config.API_PATH}/exercises/${exerciseId}`;
       let response = await fetch(endpoint);
       this.exercise = await response.json();
@@ -102,23 +95,21 @@ export default {
 h1 {
   text-align: center;
   margin-top: 1em;
-  font-size: 50px;
+  font-size: 30px;
+}
+
+nav {
+  text-align: center;
 }
 
 .exerciseContainer {
-  margin-top: 2em;
+  /* margin-top: 2em; */
   display: grid;
   place-content: center;
   text-align: center;
 }
-.excerciseSection {
-  border: 1px solid black;
-  padding: 1em 15em 1em 15em;
-  margin-top: 1em;
-  border-radius: 2%;
-  background-color: rgba(170, 120, 158, 0.438);
-}
-/* .exerciseSection {
+
+.exerciseSection {
   width: 100%;
   max-height: 70vh;
   display: grid;
@@ -128,12 +119,6 @@ h1 {
 
 .exerciseSection img {
   max-width: 100%;
-  max-height: 62%;
+  max-height: 85%;
 }
-
-.exerciseSection article {
-  padding: 0.5em;
-  display: grid;
-  grid-template-rows: auto auto auto;
-} */
 </style>
