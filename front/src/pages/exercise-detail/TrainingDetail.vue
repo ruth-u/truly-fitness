@@ -1,15 +1,18 @@
 <template>
-  <section class="my-plans">
+  <nav></nav>
+  <h1>Detalle del ejercicio</h1>
+  <section class="exerciseContainer">
     <section class="exerciseSection">
-      <div>
-        <article>
-          <h2>{{ exercise.name }}</h2>
-        </article>
-        <article>
-          {{ exercises.img }}
-          <img :key="exercise.id" :src="images[exercise.id - 1]" />
-        </article>
-      </div>
+      <article>
+        <h2>{{ exercise.name }}</h2>
+      </article>
+      <article>
+        {{ exercise.description }}
+      </article>
+      <article>
+        {{ exercise.img }}
+        <img :key="exercise.id" :src="images[exercise.id - 1]" />
+      </article>
     </section>
   </section>
 </template>
@@ -18,9 +21,10 @@
 import config from "@/config.js";
 
 export default {
+  name: "Detail",
   data() {
     return {
-
+      exercise: {},
       images: [
         require("@/images/legs/sentadillas.jpg"),
         require("@/images/legs/hip-thrust.jpeg"),
@@ -67,33 +71,24 @@ export default {
   },
 
   mounted() {
-
-    this.getExercisesById()
+    this.getExercisesById();
   },
 
+  methods: {
     async getExercisesById() {
       let exerciseId = this.$route.params.id;
-      const settings = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+      // const settings = {
+      //   method: "GET",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // };
 
-      const endpoint = `${config.API_PATH}/exercises/${exercise_id}`;
+      let endpoint = `${config.API_PATH}/exercises/${exerciseId}`;
       let response = await fetch(endpoint);
-      this.exercises = await response.json();
-      // let user = localStorage.getItem("user");
-      // console.log(JSON.parse(user));
+      this.exercise = await response.json();
     },
   },
-
-  // async getUsers() {
-  //   const endpoint = `${config.API_PATH}/users`;
-  //   let response = await fetch(endpoint);
-  //   this.users = await response.json();
-  //   console.log(">>>>>", this.users);
-  // },
 };
 </script>
 
@@ -112,10 +107,9 @@ h1 {
 
 .exerciseSection {
   width: 100%;
-  overflow-y: scroll;
   max-height: 70vh;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 0.5em;
 }
 
@@ -126,7 +120,7 @@ h1 {
 
 .exerciseSection article {
   padding: 0.5em;
-  display: grid;
-  grid-template-rows: auto auto auto;
+  /* display: grid;
+  grid-template-rows: auto auto auto; */
 }
 </style>

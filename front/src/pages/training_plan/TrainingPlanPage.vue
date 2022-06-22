@@ -24,8 +24,9 @@
           {{ exercises.img }}
           <img :key="exercise.id" :src="images[exercise.id - 1]" />
         </article>
+
         <article>
-          <router-link :to="`/exercises/${exercises.id}`"
+          <router-link :to="`/exercises/${exercise.id}`"
             >ver detalle</router-link
           >
         </article>

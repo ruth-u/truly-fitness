@@ -17,6 +17,11 @@ const routes = [
     name: "Plan",
     component: () => import("@/pages/training_plan/TrainingPlanPage.vue"),
   },
+  {
+    path: "/exercises/:id",
+    name: "Detail",
+    component: () => import("@/pages/exercise-detail/TrainingDetail.vue"),
+  },
 ];
 
 const router = createRouter({
