@@ -1,6 +1,6 @@
 <template>
-  <section class="form">
-    <div class="sing_up">
+  <section class="register-page">
+    <div class="form">
       <input
         type="text"
         id="first_name"
@@ -33,9 +33,7 @@
         placeholder="elige una contraseña"
       />
       <label for="password"></label>
-    </div>
-    <p>¿Cual es tu objetivo?</p>
-    <div>
+      <p>¿Cual es tu objetivo?</p>
       <input
         type="radio"
         id="loose_weight"
@@ -44,8 +42,7 @@
         v-model="user.goal"
       />
       <label for="loose_weight">Perder peso</label>
-    </div>
-    <div>
+
       <input
         type="radio"
         id="gain_weight"
@@ -54,25 +51,25 @@
         v-model="user.goal"
       />
       <label for="gain_weight">Ganar peso</label>
-    </div>
-    <label for="weight">Peso:</label>
-    <input
-      type="text"
-      id="weight"
-      name="weight"
-      v-model="user.weight"
-      required
-    />
-    <label for="height">Altura:</label>
-    <input
-      type="text"
-      id="height"
-      name="height"
-      v-model="user.height"
-      required
-    />
-    <p>¿Tienes experiencia previa entrenando?</p>
-    <div>
+
+      <label for="weight">Peso:</label>
+      <input
+        type="text"
+        id="weight"
+        name="weight"
+        v-model="user.weight"
+        required
+      />
+      <label for="height">Altura:</label>
+      <input
+        type="text"
+        id="height"
+        name="height"
+        v-model="user.height"
+        required
+      />
+      <div><p>¿Tienes experiencia previa entrenando?</p></div>
+
       <input
         type="radio"
         id="experiencie_yes"
@@ -81,8 +78,7 @@
         v-model="user.experiencie"
       />
       <label for="experiencie_yes">Si</label>
-    </div>
-    <div>
+
       <input
         type="radio"
         id="experiencie_no"
@@ -102,12 +98,12 @@
         v-model="user.register_date"
         required
       />
-    </div>
-    <div>
-      <button @click.prevent="createNewUser(user)">Guardar</button>
+      >
+      <div>
+        <button @click.prevent="createNewUser(user)">Guardar</button>
+      </div>
     </div>
   </section>
-  {{ user }}
 </template>
 
 <script>
@@ -166,7 +162,7 @@ export default {
 
       let response = await fetch(`${config.API_PATH}/users`, settings);
       this.$router.push("/training_plan");
-
+      localStorage.setItem("user", JSON.stringify(user));
       return response;
     },
     async newUser() {
@@ -187,49 +183,52 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-.goalContent {
-  width: fit-content;
-  border: 1px solid black;
-  padding: 2em;
-  margin-left: auto;
-  margin-right: auto;
-  /* margin-bottom: 5em; */
-}
 
+.register-page {
+  border: 0;
+  height: 70vh;
+  padding: 8% 0 0;
+}
 .form {
-  width: fit-content;
-  border: 1px solid black;
-  padding: 2em;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-/* label,
-#experiencie {
-  padding-block: 1em;
-} */
-/* 
-.form,
-#weight {
-  display: grid;
-  grid-row: inherit;
-} */
+.form input {
+  outline: 0;
+  background: #ffffff;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
-p:hover {
-  background-color: gray;
+  font-size: 14px;
 }
-
-.goalContent .looseWeight {
-  display: grid;
-  grid-row: inherit;
+.form button {
+  /* font-family: "Roboto", sans-serif; */
+  text-transform: uppercase;
+  outline: 0;
+  background: rgba(57, 116, 226, 0.438);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font: bold;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
   cursor: pointer;
-  background-color: greenyellow;
 }
-
-.goalContent .gainWeight {
-  height: fit-content;
-  display: grid;
-  grid-row: inherit;
-  cursor: pointer;
-  background-color: greenyellow;
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: rgba(8, 86, 122, 0.767);
 }
 </style>

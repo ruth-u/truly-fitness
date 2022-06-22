@@ -59,6 +59,12 @@ def create_app(repositories):
         exercises = repositories["exercises"].get_exercises()
         return object_to_json(exercises)
 
+    # @app.route("/api/exercises_category", methods=["GET"])
+    # def get_exercise_category():
+
+    #     exercises = repositories["exercises"].get_exercises_by_category(category)
+    #     return object_to_json(exercises)
+
     @app.route("/api/plan", methods=["GET"])
     def exercises_by_exeperiencie():
         user_no_experiencie = repositories["users"].get_user_by_experiencie(0)
@@ -72,7 +78,5 @@ def create_app(repositories):
             return object_to_json(advanced_exercises)
         else:
             return "", 401
-
-    # def exercises_by_day
 
     return app

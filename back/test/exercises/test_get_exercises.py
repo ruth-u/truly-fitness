@@ -21,18 +21,20 @@ def test_should_return_exercises():
     client = app.test_client()
 
     exercise1 = Exercise(
-        id="000",
+        id=1,
         name="sentadillas",
         description="10 repeticiones",
         img="",
+        category="piernas",
     )
     exercises_repository.save(exercise1)
 
     exercise2 = Exercise(
-        id="008",
+        id=8,
         name="zancadas",
         description="10 repeticiones",
         img="",
+        category="hit",
     )
 
     exercises_repository.save(exercise2)
@@ -41,12 +43,14 @@ def test_should_return_exercises():
 
     exercise_list = response.json
     assert len(exercise_list) == 2
-    assert exercise_list[0]["id"] == "000"
+    assert exercise_list[0]["id"] == 1
     assert exercise_list[0]["name"] == "sentadillas"
     assert exercise_list[0]["description"] == "10 repeticiones"
     assert exercise_list[0]["img"] == ""
+    assert exercise_list[0]["category"] == "piernas"
 
-    assert exercise_list[1]["id"] == "008"
+    assert exercise_list[1]["id"] == 8
     assert exercise_list[1]["name"] == "zancadas"
     assert exercise_list[1]["description"] == "10 repeticiones"
     assert exercise_list[1]["img"] == ""
+    assert exercise_list[1]["category"] == "hit"

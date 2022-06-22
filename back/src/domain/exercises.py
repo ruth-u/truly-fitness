@@ -1,12 +1,14 @@
 import sqlite3
+from unicodedata import category
 
 
 class Exercise:
-    def __init__(self, id, name, description, img):
+    def __init__(self, id, name, description, img, category):
         self.id = id
         self.name = name
         self.description = description
         self.img = img
+        self.category = category
 
     def to_dict(self):
         return {
@@ -14,6 +16,7 @@ class Exercise:
             "name": self.name,
             "description": self.description,
             "img": self.img,
+            "category": self.category,
         }
 
 
@@ -29,10 +32,11 @@ class ExerciseRepository:
 
     def init_tables(self):
         sql = """CREATE TABLE if not exists exercises (
-                id VARCHAR PRIMARY KEY,
+                id INTEGER PRIMARY KEY,
                 name VARCHAR,
                 description VARCHAR,
-                img VARCHAR
+                img TEXT,
+                category TEXT
                 )
         """
         conn = self.create_conn()
@@ -62,12 +66,7 @@ class ExerciseRepository:
 
         result = []
         for i in data:
-            exercise = Exercise(
-                id=i["id"],
-                name=i["name"],
-                description=i["description"],
-                img=i["img"],
-            )
+            exercise = Exercise(**i)
             result.append(exercise)
         return result
 
@@ -80,18 +79,26 @@ class ExerciseRepository:
 
         result = []
         for i in data:
-            exercise = Exercise(
-                id=i["id"],
-                name=i["name"],
-                description=i["description"],
-                img=i["img"],
-            )
+            exercise = Exercise(**i)
             result.append(exercise)
         return result
 
+    def get_exercises_by_category(self, category):
+        sql = """SELECT * FROM exercises where category=:category"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"category": category})
+        data = cursor.fetchall()
+
+        result = []
+        for i in data:
+            category = Exercise(**i)
+            result.append(category)
+        return result
+
     def save(self, exercise):
-        sql = """insert into exercises (id, name, description, img) 
-                    values (:id, :name, :description, :img)"""
+        sql = """insert into exercises (id, name, description, img, category) 
+                    values (:id, :name, :description, :img, :category)"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, exercise.to_dict())

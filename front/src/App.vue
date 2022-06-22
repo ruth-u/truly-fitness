@@ -9,10 +9,14 @@
   font-family: "Josefin Sans", sans-serif;
 }
 body {
-  background-color: rgba(255, 255, 255, 255);
-  background-image: url("https://i.pinimg.com/564x/bd/5b/0d/bd5b0de38babb5e9fc07731ba9b9dbdb.jpg");
-  background-position: bottom;
+  min-width: 100vh;
+  background-color: rgba(17, 40, 141, 0.521);
+  background-image: url("https://png.pngtree.com/background/20210711/original/pngtree-fitness-and-fashion-fresh-ads-picture-image_1097123.jpg");
   background-repeat: no-repeat;
-  /* background-size: cover; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: fixed;
+  background-position: center;
 }
 </style>

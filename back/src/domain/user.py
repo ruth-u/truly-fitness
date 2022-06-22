@@ -120,19 +120,8 @@ class UserRepository:
         data = cursor.fetchall()
         result = []
         for item in data:
-            user = User(
-                id=item["id"],
-                user_name=item["user_name"],
-                password=item["password"],
-                first_name=item["first_name"],
-                last_name=item["last_name"],
-                goal=item["goal"],
-                weight=item["weight"],
-                height=item["height"],
-                experiencie=item["experiencie"],
-                register_date=item["register_date"],
-            )
-            result.append(result)
+            user = User(**item)
+            result.append(user)
         return result
 
     def save(self, user):
