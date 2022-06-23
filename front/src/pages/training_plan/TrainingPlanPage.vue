@@ -1,15 +1,11 @@
 <template>
+  <div>
+    <nav>
+      <router-link to="/info">ℹ️</router-link>
+    </nav>
+  </div>
+  <h1>Bienvenido</h1>
   <section class="my-plan">
-    <div>
-      <div>
-        <nav>
-          <router-link to="http://foo.com/bar.html#disqus_thread"
-            >ℹ️</router-link
-          >
-        </nav>
-      </div>
-      <h1>Bienvenido</h1>
-    </div>
     <section class="exerciseContent">
       <button @click="filterByLegs">Tren inferior</button>
 
@@ -163,7 +159,7 @@ h1 {
 } */
 .my-plan {
   padding-bottom: 1em;
-  background-color: rgba(233, 190, 134, 0.623);
+  background-color: rgba(143, 136, 133, 0.548);
 }
 .exerciseContent {
   width: 100%;
