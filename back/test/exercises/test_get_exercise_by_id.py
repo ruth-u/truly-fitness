@@ -3,7 +3,7 @@ from src.webserver import create_app
 from src.domain.exercises import Exercise, ExerciseRepository
 
 
-def test_should_return_a_exercises_by_id():
+def test_should_return_a_exercise_by_id():
     exercises_repository = ExerciseRepository(temp_file())
     app = create_app(repositories={"exercises": exercises_repository})
     client = app.test_client()

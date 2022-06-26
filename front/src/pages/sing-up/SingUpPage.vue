@@ -34,6 +34,7 @@
       />
       <label for="password"></label>
       <p>¿Cual es tu objetivo?</p>
+      <label for="loose_weight">Perder peso</label>
       <input
         type="radio"
         id="loose_weight"
@@ -41,8 +42,8 @@
         value="loose_weight"
         v-model="user.goal"
       />
-      <label for="loose_weight">Perder peso</label>
 
+      <label for="gain_weight">Ganar peso</label>
       <input
         type="radio"
         id="gain_weight"
@@ -50,7 +51,6 @@
         value="gain_weight"
         v-model="user.goal"
       />
-      <label for="gain_weight">Ganar peso</label>
 
       <label for="weight">Peso:</label>
       <input
@@ -69,7 +69,7 @@
         required
       />
       <div><p>¿Tienes experiencia previa entrenando?</p></div>
-
+      <label for="experiencie_yes">Si</label>
       <input
         type="radio"
         id="experiencie_yes"
@@ -77,7 +77,7 @@
         value="1"
         v-model="user.experiencie"
       />
-      <label for="experiencie_yes">Si</label>
+      <label for="experiencie_no">No</label>
 
       <input
         type="radio"
@@ -86,19 +86,7 @@
         value="0"
         v-model="user.experiencie"
       />
-      <label for="experiencie_no">No</label>
 
-      <br />
-
-      <label for="height">Fecha de registro:</label>
-      <input
-        type="date"
-        id="user_register"
-        name="user_register"
-        v-model="user.register_date"
-        required
-      />
-      >
       <div>
         <button @click.prevent="createNewUser(user)">Guardar</button>
       </div>

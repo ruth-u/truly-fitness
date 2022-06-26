@@ -41,6 +41,7 @@ import config from "@/config.js";
 export default {
   data() {
     return {
+      user: {},
       exercises: [],
       filteredList: null,
       images: [
@@ -114,7 +115,9 @@ export default {
       );
     },
     async getAllExercises() {
-      const endpoint = `${config.API_PATH}/plan`;
+      let user = JSON.parse(localStorage.getItem("user"));
+      console.log(user, "****");
+      const endpoint = `${config.API_PATH}/plan/${user.user_name}`;
       let response = await fetch(endpoint);
       this.exercises = await response.json();
       this.filteredList = this.exercises;

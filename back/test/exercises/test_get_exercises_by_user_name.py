@@ -44,7 +44,7 @@ def test_should_get_exercises_for_experiencied_user():
     )
     exercises_repository.save(advanced_exercise)
     exercises_repository.save(basic_exercise)
-    response = client.get("/api/plan")
+    response = client.get("/api/plan/christian")
 
     exercise_list = response.json
     assert len(exercise_list) == 1
@@ -64,7 +64,7 @@ def test_should_get_exercises_for_unexperiencied_user():
     client = app.test_client()
 
     nagore = User(
-        id=1,
+        id=2,
         user_name="nagore.c",
         password="nagore123",
         first_name="nagore",
@@ -94,7 +94,7 @@ def test_should_get_exercises_for_unexperiencied_user():
     )
     exercises_repository.save(advanced_exercise)
     exercises_repository.save(basic_exercise)
-    response = client.get("/api/plan")
+    response = client.get("/api/plan/nagore.c")
 
     exercise_list = response.json
     assert len(exercise_list) == 1

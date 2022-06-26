@@ -67,3 +67,33 @@ def test_should_return_a_user():
     assert user_list[1]["weight"] == "110"
     assert user_list[1]["height"] == "175"
     assert user_list[1]["experiencie"] == 0
+
+
+# def test_should_return_a_user_that_doesnt_exists():
+#     users_repository = UserRepository(temp_file())
+#     app = create_app(repositories={"users": users_repository})
+#     client = app.test_client()
+
+#     christian = User(
+#         id="uu1",
+#         user_name="christian",
+#         password="chris123",
+#         first_name="christian",
+#         last_name="garcia",
+#         goal="ganar peso",
+#         weight="70",
+#         height="185",
+#         experiencie=1,
+#         register_date="2022-06-07",
+#     )
+#     users_repository.save(christian)
+#     response = client.get("/api/users")
+#     user_list = response.json
+#     assert len(user_list) == 1
+#     assert user_list[0]["id"] == "uu2"
+#     assert user_list[0]["user_name"] == "no exists"
+#     assert user_list[0]["password"] == "no exist"
+#     assert user_list[0]["goal"] == "ganar peso"
+#     assert user_list[0]["weight"] == "70"
+#     assert user_list[0]["height"] == "185"
+#     assert user_list[0]["experiencie"] == 1

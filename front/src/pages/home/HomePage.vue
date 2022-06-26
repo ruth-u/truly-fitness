@@ -62,6 +62,7 @@ export default {
       const response = await loginUser(this.user.user_name, this.user.password);
       const loginStatus = response.status;
       console.log("response", response);
+      localStorage.setItem("user", JSON.stringify(this.user));
 
       if (loginStatus === 200) {
         this.$router.push("/training_plan");

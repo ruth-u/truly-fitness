@@ -13,6 +13,7 @@ export async function loginUser(user_name, password) {
     }),
   };
 
-  const response = fetch(`${config.AUTH_PATH}/login`, settings);
+  let response = await fetch(`${config.AUTH_PATH}/login`, settings);
+  localStorage.setItem("user", JSON.stringify(response));
   return response;
 }

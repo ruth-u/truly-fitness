@@ -64,18 +64,18 @@ def create_app(repositories):
         exercises = repositories["exercises"].get_exercise_by_id(id)
         return object_to_json(exercises)
 
-    @app.route("/api/plan", methods=["GET"])
-    def exercises_by_exeperiencie():
-        user_no_experiencie = repositories["users"].get_user_by_experiencie(0)
-        user_with_experiencie = repositories["users"].get_user_by_experiencie(1)
+    @app.route("/api/plan/<username>", methods=["GET"])
+    def exercises_by_id(username):
+
+        user_name = repositories["users"].get_by_user_name(username)
+        # user_with_experiencie = repositories["users"].get_user_by_experiencie(1)
         basic_exercises = repositories["exercises"].get_basic_exercises()
         advanced_exercises = repositories["exercises"].get_advanced_exercises()
-
-        if user_no_experiencie:
+        user_name = user_name.to_dict()
+        print("user_name", user_name)
+        if user_name["experiencie"] == 0:
             return object_to_json(basic_exercises)
-        elif user_with_experiencie:
+        if user_name["experiencie"] == 1:
             return object_to_json(advanced_exercises)
-        else:
-            return "", 401
 
     return app

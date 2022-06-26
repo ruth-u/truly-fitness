@@ -111,18 +111,19 @@ class UserRepository:
             )
         return user
 
-    def get_user_by_experiencie(self, experiencie):
-        sql = """SELECT * FROM users WHERE experiencie=:experiencie"""
+    def get_user_by_id(self, id):
+        sql = """SELECT * FROM users WHERE id=:id"""
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql, {"experiencie": experiencie})
+        cursor.execute(sql, {"id": id})
 
-        data = cursor.fetchall()
-        result = []
-        for item in data:
-            user = User(**item)
-            result.append(user)
-        return result
+        data = cursor.fetchone()
+
+        if data is None:
+            return None
+        else:
+            user = User(**data)
+            return user
 
     def save(self, user):
         sql = """insert or replace into users (id, user_name, password, first_name, last_name, goal, weight, height, experiencie, register_date) 
