@@ -12,6 +12,7 @@
       <article>
         {{ exercise.img }}
         <img :key="exercise.id" :src="images[exercise.id - 1]" />
+        <!-- <iframe :key="exercise.id" width="853" height="480" :src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
       </article>
     </div>
   </section>

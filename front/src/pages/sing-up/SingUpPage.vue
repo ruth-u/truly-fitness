@@ -69,7 +69,7 @@
         required
       />
       <div><p>¿Tienes experiencia previa entrenando?</p></div>
-      <label for="experiencie_yes">Si</label>
+      <label class="labelForYes" for="experiencie_yes">Si</label>
       <input
         type="radio"
         id="experiencie_yes"
@@ -77,7 +77,7 @@
         value="1"
         v-model="user.experiencie"
       />
-      <label for="experiencie_no">No</label>
+      <label class="labelForNo" for="experiencie_no">No</label>
 
       <input
         type="radio"
@@ -174,14 +174,14 @@ export default {
 
 .register-page {
   border: 0;
-  height: 70vh;
-  padding: 8% 0 0;
+  height: 50vh;
+  padding-bottom: 1%;
 }
 .form {
   position: relative;
   z-index: 1;
   background: #ffffff;
-  max-width: 360px;
+  max-width: 380px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
@@ -199,6 +199,7 @@ export default {
 
   font-size: 14px;
 }
+
 .form button {
   /* font-family: "Roboto", sans-serif; */
   text-transform: uppercase;

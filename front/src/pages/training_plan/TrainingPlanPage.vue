@@ -1,21 +1,28 @@
 <template>
   <div>
     <nav>
-      <router-link to="/info">ℹ️</router-link>
+      <!-- <router-link to="/info">ℹ️</router-link> -->
     </nav>
   </div>
-  <h1>Bienvenido</h1>
+  <div v-if="isLoading" class="loading">
+    <p>Loading&#8230;</p>
+  </div>
+  <div v-if="isLoading == false">
+    <h1>Bienvenido a tu plan semanal ! {{ this.user.user_name }}</h1>
+
+    <button @click="filterByLegs">Tren inferior</button>
+
+    <button @click="filterByAbs">Abdomen</button>
+
+    <button @click="filterByArms">Tren superior</button>
+
+    <button @click="filterByHit">Hit</button>
+
+    <button @click="showAllExercisesAgain">Todos</button>
+  </div>
+
   <section class="my-plan">
     <section class="exerciseContent">
-      <button @click="filterByLegs">Tren inferior</button>
-
-      <button @click="filterByAbs">Abdomen</button>
-
-      <button @click="filterByArms">Tren superior</button>
-
-      <button @click="filterByHit">Hit</button>
-
-      <button @click="getAllExercises">Todos</button>
       <div v-for="exercise in filteredList" :key="exercise.id">
         <article>
           <h2>{{ exercise.name }}</h2>
@@ -41,6 +48,7 @@ import config from "@/config.js";
 export default {
   data() {
     return {
+      isLoading: false,
       user: {},
       exercises: [],
       filteredList: null,
@@ -114,24 +122,25 @@ export default {
         (exercise) => exercise.category == "hit"
       );
     },
-    async getAllExercises() {
+    async showAllExercisesAgain() {
       let user = JSON.parse(localStorage.getItem("user"));
-      console.log(user, "****");
       const endpoint = `${config.API_PATH}/plan/${user.user_name}`;
       let response = await fetch(endpoint);
       this.exercises = await response.json();
       this.filteredList = this.exercises;
-      // let user = localStorage.getItem("user");
-      // console.log(JSON.parse(user));
+    },
+
+    async getAllExercises() {
+      this.isLoading = true;
+      let user = JSON.parse(localStorage.getItem("user"));
+      await new Promise((resolve) => setTimeout(resolve, 2700));
+      const endpoint = `${config.API_PATH}/plan/${user.user_name}`;
+      let response = await fetch(endpoint);
+      this.exercises = await response.json();
+      this.filteredList = this.exercises;
+      this.isLoading = false;
     },
   },
-
-  // async getUsers() {
-  //   const endpoint = `${config.API_PATH}/users`;
-  //   let response = await fetch(endpoint);
-  //   this.users = await response.json();
-  //   console.log(">>>>>", this.users);
-  // },
 };
 </script>
 
@@ -148,18 +157,6 @@ h1 {
   font-size: 40px;
 }
 
-/* .my-plan {
-  margin-top: 2em;
-  display: grid;
-  place-content: center;
-}
-.excerciseSection {
-  border: 1px solid black;
-  padding: 1em 15em 1em 15em;
-  margin-top: 1em;
-  border-radius: 2%;
-  background-color: rgba(170, 120, 158, 0.438);
-} */
 .my-plan {
   padding-bottom: 1em;
   background-color: rgba(143, 136, 133, 0.548);
@@ -184,5 +181,133 @@ h1 {
 }
 nav {
   text-align: right;
+}
+
+/* Absolute Center Spinner */
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.loading:before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.521);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.loading:not(:required):after {
+  content: "";
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1700ms infinite linear;
+  -moz-animation: spinner 1700ms infinite linear;
+  -ms-animation: spinner 1700ms infinite linear;
+  -o-animation: spinner 1700ms infinite linear;
+  animation: spinner 1700ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0,
+    rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 </style>
